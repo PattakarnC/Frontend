@@ -23,7 +23,7 @@
                         <v-form ref="form" v-model="valid" lazy-validation>
                           <v-text-field
                             v-model="username"
-                            :rules="usernameRules"
+                            :rules="inputRules"
                             label="Username"
                             name="username"
                             prepend-icon="person"
@@ -34,7 +34,7 @@
 
                           <v-text-field
                             v-model="password"
-                            :rules="passwordRules"
+                            :rules="inputRules"
                             id="password"
                             label="Password"
                             name="password"
@@ -43,6 +43,8 @@
                             color="teal accent-3"
                             required
                           />
+
+
                         </v-form>
                       </v-card-text>
                       <div class="text-center mb-10">
@@ -51,7 +53,7 @@
                           rounded
                           color="teal accent-3"
                           dark
-                          @click="submit"
+                          @click="handleLogin"
                         >SIGN IN</v-btn
                         >
                       </div>
@@ -69,7 +71,6 @@
                           rounded
                           outlined
                           dark
-                          @click="step++"
                           to="/signup"
                         >SIGN UP</v-btn
                         >
@@ -86,8 +87,8 @@
   </v-app>
 </template>
 
-<script>
-import Vue from "vue";
+<!--<script>-->
+<!--import Vue from "vue";-->
 
 <!--export default {-->
 <!--  name: "Login",-->
@@ -143,3 +144,52 @@ import Vue from "vue";
 <!--  background-size: cover;-->
 <!--}-->
 <!--</style>-->
+<script>
+import user from '../models/user';
+// import NavBar from './NavBarBeforeLogin';
+export default {
+  name: 'Login',
+  // components: {
+  //   NavBar
+  // },
+
+  data() {
+    return {
+      user: new user(this.username, this.password),
+      loading: false,
+      message: '',
+      inputRules: [v => !!v || 'This field is required'],
+      isValid: true
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push('/home');
+    }
+  },
+  methods: {
+    handleLogin() {
+      this.loading = true;
+      if (this.user.username && this.user.password) {
+        this.$store.dispatch('auth/login', this.user).then(
+          () => {
+            // if(this.$store.user.role.has('ROLE_ADMIN')) this.$router.push('/admin');
+            this.$router.push('/home');
+          },
+          error => {
+            this.loading = false;
+            if (error.response.status === 401) {
+              this.message = "Wrong username or password";
+            }
+          }
+        );
+      }
+    }
+  }
+};
+</script>

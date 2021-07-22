@@ -47,6 +47,7 @@
 
                           <v-text-field
                             v-model="display_name"
+                            :rules="inputRules"
                             label="Name"
                             name="Name"
                             prepend-icon="face"
@@ -55,14 +56,16 @@
                           />
                           <v-text-field
                             v-model="age"
+                            :rules="inputRules"
                             label="Age"
                             name="Age"
                             prepend-icon="accessibility"
-                            type="text"
+                            type="number"
                             color="teal accent-3"
                           />
                            <v-text-field
                              v-model="weight"
+                             :rules="inputRules"
                              id="Weight"
                              label="Weight"
                              name="weight"
@@ -72,6 +75,7 @@
                            />
                           <v-text-field
                             v-model="height"
+                            :rules="inputRules"
                             id="Height"
                             label="Height"
                             name="height"
@@ -81,6 +85,7 @@
                           />
                           <v-text-field
                             v-model="username"
+                            :rules="inputRules"
                             id="Username"
                             label="Username"
                             name="username"
@@ -90,6 +95,7 @@
                           />
                           <v-text-field
                             v-model="password"
+                            :rules="inputRules"
                             id="Password"
                             label="Password"
                             name="password"
@@ -114,8 +120,8 @@
   </v-app>
 </template>
 
-<script>
-import Vue from "vue";
+<!--<script>-->
+<!--import Vue from "vue";-->
 
 <!--export default {-->
 <!--  name: "Signup",-->
@@ -131,19 +137,19 @@ import Vue from "vue";
 <!--    age: "",-->
 
 
-  }),
-  methods: {
-    async submit() {
-      if (this.$refs.form.validate()) {
-        // submit to backend to authenticate
-        let formData = new FormData();
-        formData.append("username", this.username);
-        formData.append("password", this.password);
-        formData.append("gender", this.gender);
-        formData.append("display_name", this.display_name);
-        formData.append("weight", this.weight);
-        formData.append("height", this.height);
-        formData.append("age", this.age);
+<!--  }),-->
+<!--  methods: {-->
+<!--    async submit() {-->
+<!--      if (this.$refs.form.validate()) {-->
+<!--        // submit to backend to authenticate-->
+<!--        let formData = new FormData();-->
+<!--        formData.append("username", this.username);-->
+<!--        formData.append("password", this.password);-->
+<!--        formData.append("gender", this.gender);-->
+<!--        formData.append("display_name", this.display_name);-->
+<!--        formData.append("weight", this.weight);-->
+<!--        formData.append("height", this.height);-->
+<!--        formData.append("age", this.age);-->
 
 
 <!--        let respond = await Vue.axios.post("/api/signup", formData);-->
@@ -162,3 +168,110 @@ import Vue from "vue";
 <style scoped>
 
 </style>
+
+<!--<script>-->
+<!--import Vue from "vue";-->
+
+<!--export default {-->
+<!--  name: "SignUp",-->
+<!--  props: {-->
+<!--    source: String-->
+<!--  },-->
+<!--  data: () => ({-->
+<!--    valid: true,-->
+<!--    username: '',-->
+<!--    password: '',-->
+<!--    step :1,// exist-->
+<!--    usernameRules:[v => !!v || 'Username is required'],-->
+<!--    passwordRules:[v => !!v || 'Username is required'],-->
+<!--    nameRules: [-->
+<!--      v => !!v || 'Name is required',-->
+<!--      v => (v && v.length <= 10) || 'Name must be less than 10 characters',-->
+<!--    ],-->
+<!--    // email: '',-->
+<!--    // emailRules: [-->
+<!--    //   v => !!v || 'E-mail is required',-->
+<!--    //   v => /.+@.+\..+/.test(v) || 'E-mail must be valid',-->
+<!--    // ],-->
+<!--    // select: null,-->
+<!--    // items: [-->
+<!--    //   'Item 1',-->
+<!--    //   'Item 2',-->
+<!--    //   'Item 3',-->
+<!--    //   'Item 4',-->
+<!--    // ],-->
+<!--    // checkbox: false,-->
+<!--  // }),-->
+<!--//This is a method that take information as a link .validate,... into this methods-->
+<!--  methods: {-->
+<!--    async submit() {-->
+<!--      if (this.$refs.form.validate()) {-->
+<!--        // submit to backend to authenticate-->
+<!--        let formData = new FormData();-->
+<!--        formData.append("username", this.username);-->
+<!--        formData.append("password", this.username);-->
+<!--        let respond = await Vue.axios.post("/api/login", formData);-->
+<!--        if (respond.data.success) {-->
+<!--          await this.$router.push({ path: "/" });-->
+<!--        }-->
+<!--      }-->
+<!--    },-->
+<!--  },-->
+<!--};-->
+<!--</script>-->
+<script>
+
+import User from '../models/user';
+// import NavBar from './NavBarBeforeLogin'
+
+export default {
+  name: 'Signup',
+  // components: {
+  //   NavBar
+  // },
+  data() {
+    return {
+      username: "",
+      password: "",
+      gender: "",
+      display_name: "",
+      weight: "",
+      height: "",
+      age: "",
+      user: new User(this.username, this.password, this.display_name, this.gender,this.age,this.weight,this.height),
+      submitted: false,
+      successful: false,
+      message: '',
+      inputRules: [v => !!v || 'This field is required'],
+      isValid: true
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
+  mounted() {
+    if (this.loggedIn) {
+      this.$router.push('/home');
+    }
+  },
+  methods: {
+    handleRegister() {
+      this.message = '';
+      this.submitted = true;
+      this.$store.dispatch('auth/register', this.user).then(
+        data => {
+          this.message = data.message;
+          this.successful = true;
+          this.$router.push('/login');
+        },
+        error => {
+          this.message = error.message;
+          this.successful = false;
+        }
+      );
+    }
+  }
+};
+</script>
