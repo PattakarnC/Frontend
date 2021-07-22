@@ -46,6 +46,7 @@
                           </v-select>
 
                           <v-text-field
+                            v-model="display_name"
                             label="Name"
                             name="Name"
                             prepend-icon="face"
@@ -53,6 +54,7 @@
                             color="teal accent-3"
                           />
                           <v-text-field
+                            v-model="age"
                             label="Age"
                             name="Age"
                             prepend-icon="accessibility"
@@ -60,6 +62,7 @@
                             color="teal accent-3"
                           />
                            <v-text-field
+                             v-model="weight"
                              id="Weight"
                              label="Weight"
                              name="weight"
@@ -68,6 +71,7 @@
                              color="teal accent-3"
                            />
                           <v-text-field
+                            v-model="height"
                             id="Height"
                             label="Height"
                             name="height"
@@ -76,6 +80,7 @@
                             color="teal accent-3"
                           />
                           <v-text-field
+                            v-model="username"
                             id="Username"
                             label="Username"
                             name="username"
@@ -84,6 +89,7 @@
                             color="teal accent-3"
                           />
                           <v-text-field
+                            v-model="password"
                             id="Password"
                             label="Password"
                             name="password"
@@ -109,8 +115,47 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
-  name: "Signup"
+  name: "Signup",
+  data: () => ({
+    step: 1,
+    valid: true,
+    username: "",
+    password: "",
+    gender: "",
+    display_name: "",
+    weight: "",
+    height: "",
+    age: "",
+
+
+  }),
+  methods: {
+    async submit() {
+      if (this.$refs.form.validate()) {
+        // submit to backend to authenticate
+        let formData = new FormData();
+        formData.append("username", this.username);
+        formData.append("password", this.password);
+        formData.append("gender", this.gender);
+        formData.append("display_name", this.display_name);
+        formData.append("weight", this.weight);
+        formData.append("height", this.height);
+        formData.append("age", this.age);
+
+
+        let respond = await Vue.axios.post("/api/login", formData);
+        if (respond.data.success) {
+          await this.$router.push({ path: "/" });
+        }
+      }
+    },
+  },
+  props: {
+    source: String,
+  },
 };
 </script>
 
