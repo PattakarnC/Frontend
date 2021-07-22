@@ -9,6 +9,10 @@ import Exercise from "@/components/Exercise";
 import Home from "../components/Home";
 import Create from "../components/Create";
 import VueClock from "@dangvanthanh/vue-clock";
+import Bmi from "../components/Bmi"
+import Summary from "../components/Summary"
+
+
 // import store from "@/store";
 
 
@@ -31,20 +35,6 @@ const routes = [
     name: "Signup",
     component: Signup,
   },
-  // {
-  //   path: "/stat",
-  //   name: "Stat",
-  //   component: UserStat
-  // },
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  // },
   {
     path: "/home",
     name: "Home",
@@ -59,6 +49,16 @@ const routes = [
     path: "/exercise",
     name: "Exercise",
     component: Exercise,
+  },
+  {
+    path: "/summary",
+    name: "Summary",
+    component: Summary,
+  },
+  {
+    path: "/bmi",
+    name: "Bmi",
+    component: Bmi,
   },
 ];
 

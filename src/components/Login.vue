@@ -89,39 +89,53 @@
 <script>
 import Vue from "vue";
 
-export default {
-  data: () => ({
-    step: 1,
-    valid: true,
-    username: "",
-    password: "",
-    usernameRules: [(v) => !!v || "Username is required"],
-    passwordRules: [(v) => !!v || "Password is required"],
-  }),
-  methods: {
-    async submit() {
-      if(this.$refs.form.validate()) {
-        // submit to backend to authenticate
-        let formData = new FormData();
-        formData.append("username", this.username);
-        formData.append("password", this.password);
-
-        let response = await Vue.axios.post("/api/login", formData);
-
-        if (response.data.success) {
-          await this.$router.push({ name: "/" });
-        }
-      }
-    },
-    // reset() {
-    //   this.$refs.form.reset();
-    // },
-  },
-  props: {
-    source: String,
-  },
-};
-</script>
+<!--export default {-->
+<!--  name: "Login",-->
+<!--  props: {-->
+<!--    source: String-->
+<!--  },-->
+<!--  data: () => ({-->
+<!--    valid: true,-->
+<!--    username: '',-->
+<!--    password: '',-->
+<!--    step :1,// exist-->
+<!--    usernameRules:[v => !!v || 'Username is required'],-->
+<!--    passwordRules:[v => !!v || 'Username is required'],-->
+<!--    nameRules: [-->
+<!--      v => !!v || 'Name is required',-->
+<!--      v => (v && v.length <= 10) || 'Name must be less than 10 characters',-->
+<!--    ],-->
+<!--    // email: '',-->
+<!--    // emailRules: [-->
+<!--    //   v => !!v || 'E-mail is required',-->
+<!--    //   v => /.+@.+\..+/.test(v) || 'E-mail must be valid',-->
+<!--    // ],-->
+<!--    // select: null,-->
+<!--    // items: [-->
+<!--    //   'Item 1',-->
+<!--    //   'Item 2',-->
+<!--    //   'Item 3',-->
+<!--    //   'Item 4',-->
+<!--    // ],-->
+<!--    // checkbox: false,-->
+<!--  }),-->
+<!--//This is a method that take information as a link .validate,... into this methods-->
+<!--  methods: {-->
+<!--    async submit() {-->
+<!--      if (this.$refs.form.validate()) {-->
+<!--        // submit to backend to authenticate-->
+<!--        let formData = new FormData();-->
+<!--        formData.append("username", this.username);-->
+<!--        formData.append("password", this.username);-->
+<!--        let respond = await Vue.axios.post("/api/login", formData);-->
+<!--        if (respond.data.success) {-->
+<!--          await this.$router.push({ path: "/" });-->
+<!--        }-->
+<!--      }-->
+<!--    },-->
+<!--  },-->
+<!--};-->
+<!--</script>-->
 
 <!--<style scoped>-->
 <!--.fill-height {-->

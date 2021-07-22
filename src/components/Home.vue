@@ -32,7 +32,7 @@
                             mb-10
                           "
                         >
-                          Welcome, ${this.username}
+                          Welcome, {{username}}
                         </h1>
                         <v-data-table
                           :headers="headers"
@@ -75,6 +75,10 @@
 // import axios from "axios";
 
 export default {
+  name: "Home",
+  mounted() {
+    this.username = response
+  },
   data: () => ({
     step: 1,
     valid: true,
@@ -104,13 +108,6 @@ export default {
         date: "Frozen Yogurt",
         consumed: 159,
         burned: 6.0,
-        suggest: 4.0,
-      },
-      {
-        date: "Frozen Yogurt",
-        consumed: 159,
-        burned: 6.0,
-        bmi: 24,
         suggest: 4.0,
       },
     ],

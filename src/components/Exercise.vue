@@ -36,17 +36,19 @@
                             :items="exerciseTypes"
                             label="What kind of exercise?"
                             dense
+                            clearable
                           ></v-combobox>
                           <v-combobox
                             v-model="duration"
                             :items="durations"
                             label="How long did you exercise? (in hours)"
                             dense
+                            clearable
                           ></v-combobox>
                         </v-form>
                       </v-card-text>
                       <div class="text-center mb-10 ">
-                        <v-btn rounded color="teal accent-3" dark to="/">NEXT</v-btn>
+                        <v-btn rounded color="teal accent-3" dark to="/bmi">NEXT</v-btn>
 <!--                        to="/summary"-->
                       </div>
                     </v-col>
@@ -62,8 +64,24 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
-  data: function() {
+  name: "Exercise", // name the component
+
+  computed() {
+    if (this.exerciseType == "No exercise") {
+      this.burnedCal = 0*this.duration
+    }
+    else if (this.exerciseType == "Walking") {
+      this.burnedCal = 100*this.duration
+    }
+    else if (this.exerciseType == "Running") {
+      this.burnedCal = 200*this.duration
+    }
+  },
+
+  data()  {
     return {
       exerciseType: [],
       exerciseTypes: [
@@ -71,13 +89,29 @@ export default {
         "Walking",
         "Running"
       ],
-      duration: [], //need conditional formatting
-      durations: [
-        "0",
-        "0.5",
-        "1", "1.5", "2"
-      ],
+      duration: [],
+      durations: [0, 0.5, 1, 1.5, 2],
+      burnedCal:0,
     };
+  },
+  methods: {
+
+    async submit() {
+      if (this.$refs.form.validate()) {
+        // submit to backend to authenticate
+        let formData = new FormData();
+        formData.append("No exercise", );
+        formData.append("Walking", );
+        formData.append("Running", );
+
+
+        let response = await Vue.axios.post("/api/login", formData);
+
+        if (response.data.success) {
+          await this.$router.push({ name: "/" });
+        }
+      }
+    },
   }
 }
 </script>
