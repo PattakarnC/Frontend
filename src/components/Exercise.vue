@@ -28,7 +28,7 @@
                     </v-col>
                     <v-col cols="12" md="8">
                       <v-card-text class="mt-12">
-                        <h1 class="text-center display-2 teal--text text--accent-3 mb-10">Did you exercise today?</h1>
+                        <h1 class="text-center display-2 teal--text text--accent-3 mb-10">Did you exercise?</h1>
                         <v-form class="my-10">
 
                           <v-combobox
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import Vue from "vue";
+// import Vue from "vue";
 
 export default {
   name: "Exercise", // name the component
@@ -96,22 +96,22 @@ export default {
   },
   methods: {
 
-    async submit() {
-      if (this.$refs.form.validate()) {
-        // submit to backend to authenticate
-        let formData = new FormData();
-        formData.append("No exercise", );
-        formData.append("Walking", );
-        formData.append("Running", );
-
-
-        let response = await Vue.axios.post("/api/login", formData);
-
-        if (response.data.success) {
-          await this.$router.push({ name: "/" });
-        }
-      }
-    },
+    // async submit() {
+    //   if (this.$refs.form.validate()) {
+    //     // submit to backend to authenticate
+    //     let formData = new FormData();
+    //     formData.append("No exercise", );
+    //     formData.append("Walking", );
+    //     formData.append("Running", );
+    //
+    //
+    //     let response = await Vue.axios.post("/api/login", formData);
+    //
+    //     if (response.data.success) {
+    //       await this.$router.push({ name: "/" });
+    //     }
+    //   }
+    // },
   }
 }
 </script>

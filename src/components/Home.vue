@@ -21,7 +21,7 @@
               <v-window v-model="step">
                 <v-window-item :value="1">
                   <v-row>
-                    <v-col cols="12" md="8">
+                    <v-col cols="15" md="8">
                       <v-card-text class="mt-5">
                         <h1
                           class="
@@ -32,11 +32,11 @@
                             mb-10
                           "
                         >
-                          Welcome, {{username}}
+                          Welcome {{username}}
                         </h1>
                         <v-data-table
                           :headers="headers"
-                          :items="dates"
+                          :items="rows"
                           :items-per-page="5"
                           class="elevation-1"
                         ></v-data-table>
@@ -76,16 +76,16 @@
 
 export default {
   name: "Home",
-  mounted() {
-    this.username = response
-  },
+  // mounted() {
+  //   // this.username = response
+  // },
   data: () => ({
-    step: 1,
-    valid: true,
-    username: "",
-    password: "",
-    usernameRules: [(v) => !!v || "Username is required"],
-    passwordRules: [(v) => !!v || "Password is required"],
+    // step: 1,
+    // valid: true,
+    // username: "",
+    // password: "",
+    // usernameRules: [(v) => !!v || "Username is required"],
+    // passwordRules: [(v) => !!v || "Password is required"],
     headers: [
       {
         text: "Date",
@@ -97,18 +97,18 @@ export default {
       { text: "Burned calories", value: "burned" },
       { text: "Suggestion", value: "suggest" },
     ],
-    dates: [
+    rows: [
       {
-        date: "Frozen Yogurt",
-        consumed: 159,
-        burned: 6.0,
-        suggest: 4.0,
+        date: "",
+        consumed: "",
+        burned: "",
+        suggest: "",
       },
       {
-        date: "Frozen Yogurt",
-        consumed: 159,
-        burned: 6.0,
-        suggest: 4.0,
+        date: "",
+        consumed: "",
+        burned: "",
+        suggest: "",
       },
     ],
   }),

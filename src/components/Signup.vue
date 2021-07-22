@@ -100,7 +100,7 @@
                         </v-form>
                       </v-card-text>
                       <div class="text-center mb-10">
-                        <v-btn rounded color="teal accent-3" dark to="/stat">SIGN UP</v-btn>
+                        <v-btn rounded color="teal accent-3" dark @click="handleRegister">SIGN UP</v-btn>
                       </div>
                     </v-col>
                   </v-row>
@@ -117,18 +117,18 @@
 <script>
 import Vue from "vue";
 
-export default {
-  name: "Signup",
-  data: () => ({
-    step: 1,
-    valid: true,
-    username: "",
-    password: "",
-    gender: "",
-    display_name: "",
-    weight: "",
-    height: "",
-    age: "",
+<!--export default {-->
+<!--  name: "Signup",-->
+<!--  data: () => ({-->
+<!--    step: 1,-->
+<!--    valid: true,-->
+<!--    username: "",-->
+<!--    password: "",-->
+<!--    gender: "",-->
+<!--    display_name: "",-->
+<!--    weight: "",-->
+<!--    height: "",-->
+<!--    age: "",-->
 
 
   }),
@@ -146,18 +146,18 @@ export default {
         formData.append("age", this.age);
 
 
-        let respond = await Vue.axios.post("/api/login", formData);
-        if (respond.data.success) {
-          await this.$router.push({ path: "/" });
-        }
-      }
-    },
-  },
-  props: {
-    source: String,
-  },
-};
-</script>
+<!--        let respond = await Vue.axios.post("/api/signup", formData);-->
+<!--        if (respond.data.success) {-->
+<!--          await this.$router.push({ path: "/home" });-->
+<!--        }-->
+<!--      }-->
+<!--    },-->
+<!--  },-->
+<!--  props: {-->
+<!--    source: String,-->
+<!--  },-->
+<!--};-->
+<!--</script>-->
 
 <style scoped>
 

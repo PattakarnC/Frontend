@@ -27,13 +27,13 @@
                         <div class="text-center display-1 my-10 "  >{{BMI}}</div>
                         <div class="text-center display-1 my-7 " style="color:yellow" > {{status}}</div>
                         <div class="text-center mb-10 ">
-                          <v-btn @click="Caluclator"  rounded color="teal accent-3" dark to="/exercise">calculate</v-btn>
+                          <v-btn @click="Caluclator()"  rounded color="teal accent-3" dark >calculate</v-btn>
                         </div>
                       </v-card-text>
                     </v-col>
                     <v-col cols="12" md="8">
                       <v-card-text class="mt-12">
-                        <h1 class="text-center display-2 teal--text text--accent-3 mb-10">Create New Activity</h1>
+                        <h1 class="text-center display-2 teal--text text--accent-3 mb-10">Enter your weight and height</h1>
                         <v-form class="my-10">
 
                           <v-text-field
@@ -58,7 +58,7 @@
                         </v-form>
                       </v-card-text>
                       <div class="text-center mb-10 ">
-                        <v-btn rounded color="teal accent-3" dark to="/exercise">NEXT</v-btn>
+                        <v-btn rounded color="teal accent-3" dark to="/summary">NEXT</v-btn>
                       </div>
                     </v-col>
                   </v-row>
@@ -77,7 +77,7 @@ export default{
   name: "Bmi",
   data(){
     return{
-      weight: "" , height: "",BMI:"Enter Your Weight And Height",status:""
+      weight: "" , height: "",BMI:"Enter your weight and height",status:""
     }
   },
   methods:{
