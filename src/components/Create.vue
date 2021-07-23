@@ -8,7 +8,7 @@
               <v-icon>home</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn @click="handleLogout">
+            <v-btn to ="/">
               <v-icon color="white-text">LOG OUT</v-icon>
             </v-btn>
           </v-app-bar>

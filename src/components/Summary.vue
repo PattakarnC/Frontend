@@ -6,7 +6,7 @@
           <v-icon>home</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn to="/" >
+        <v-btn to ="/">
           <v-icon color="white-text">LOG OUT</v-icon>
         </v-btn>
       </v-app-bar>
@@ -27,7 +27,7 @@
         <div class="card__side card__side--front" id="front-2">
           <div class="text-box">
             <h3 class="text-box-top">Date</h3>
-            <h1 class="text-box-middle">{{date}}</h1>
+            <h1 class="text-box-middle">24/07/2021</h1>
             <h3 class="text-box-lower"></h3>
           </div>
         </div>
@@ -38,7 +38,7 @@
         <div class="card__side card__side--front" id="front-3">
           <div class="text-box">
             <h3 class="text-box-top">Calorie Intake</h3>
-            <h1 class="text-box-middle">{{calIn}}</h1>
+            <h1 class="text-box-middle">2800</h1>
             <h3 class="text-box-lower"></h3>
           </div>
         </div>
@@ -48,8 +48,8 @@
       <div class="card">
         <div class="card__side card__side--front" id="front-4">
           <div class="text-box">
-            <h3 class="text-box-top">Calorie Burn</h3>
-            <h1 class="text-box-middle">{{calBurn}}</h1>
+            <h3 class="text-box-top">Calorie Burned</h3>
+            <h1 class="text-box-middle">100</h1>
             <h3 class="text-box-lower"></h3>
           </div>
         </div>
@@ -60,7 +60,7 @@
         <div class="card__side card__side--front" id="front-5">
           <div class="text-box">
             <h3 class="text-box-top">Suggestion</h3>
-            <h1 class="text-box-middle">{{suggest}}</h1>
+            <h1 class="text-box-middle">Eat 200 kcal less</h1>
             <h3 class="text-box-lower"></h3>
           </div>
         </div>
@@ -243,35 +243,35 @@ body {
     rgba(204, 30, 88, 0.6),
     rgba(20, 20, 20, 0.6)
   ),
-  url("https://learning4live.com/wp-content/uploads/2019/09/running.jpg");
+  url("https://scontent.fphs4-1.fna.fbcdn.net/v/t1.6435-9/125272223_10223878091438644_4129853816922752161_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=H87ViLmrxekAX-6eMPt&_nc_ht=scontent.fphs4-1.fna&oh=ae3eed4a94e3e0ce4065d74230d8c72e&oe=611DB1FF");
 }
 #front-2 {
   background-image: linear-gradient(
     rgba(31, 136, 168, 0.767),
     rgba(14, 46, 65, 0.9)
   ),
-  url("https://images.unsplash.com/photo-1508599804355-8ce5238b44b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80");
+  url("https://cdn.discordapp.com/attachments/795822152850735104/867998883123429406/ktangwon.jpeg");
 }
 #front-3 {
   background-image: linear-gradient(
     rgba(84, 86, 175, 0.9),
     rgba(27, 27, 85, 0.9)
   ),
-  url("https://mk0mydrtest3eri40dsq.kinstacdn.com/wp-content/uploads/2020/10/AdobeStock_291970757.jpg");
+  url("https://cdn.discordapp.com/attachments/795822152850735104/868000123215548446/Screen_Shot_2564-07-23_at_12.20.51.png");
 }
 #front-4 {
   background-image: linear-gradient(
     rgba(74, 190, 122, 0.767),
     rgba(6, 66, 48, 0.9)
   ),
-  url("https://www.helpguide.org/wp-content/uploads/young-woman-performing-pushups-indoors-768.jpg");
+  url("https://cdn.discordapp.com/attachments/795822152850735104/868001116841971762/JB.jpeg");
 }
 #front-5 {
   background-image: linear-gradient(
     rgba(128, 74, 190, 0.767),
     rgba(42, 6, 66, 0.9)
   ),
-  url("https://blog.ohiohealth.com/wp-content/uploads/2017/01/Exercise-Schedule-Workout-Plan.png");
+  url("https://scontent.fphs4-1.fna.fbcdn.net/v/t1.18169-9/31805_392816929468_6841856_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=cdbe9c&_nc_ohc=1i9RT7MwhSoAX9NsR3f&_nc_ht=scontent.fphs4-1.fna&oh=9f63b17ade08576dda84c69fe3465edc&oe=611F794D");
 }
 #front-6 {
   background-image: linear-gradient(

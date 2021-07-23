@@ -23,7 +23,6 @@
                       <v-card-text class="mt-12">
                         <h1 class="text-center display-2 teal--text text--accent-3">Create Account</h1>
                         <v-form>
-
                           <v-select
                             :items="['Male', 'Female']"
                             label="Gender"
@@ -106,7 +105,7 @@
                         </v-form>
                       </v-card-text>
                       <div class="text-center mb-10">
-                        <v-btn rounded color="teal accent-3" dark @click="handleRegister">SIGN UP</v-btn>
+                        <v-btn rounded color="teal accent-3" dark to ="/home">SIGN UP</v-btn>
                       </div>
                     </v-col>
                   </v-row>
