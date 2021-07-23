@@ -24,6 +24,7 @@
                         <h1 class="text-center display-2 teal--text text--accent-3">Create Account</h1>
                         <v-form>
                           <v-select
+                            v-model="user.gender"
                             :items="['Male', 'Female']"
                             label="Gender"
                             prepend-icon="fas fa-venus-mars"
@@ -45,7 +46,7 @@
                           </v-select>
 
                           <v-text-field
-                            v-model="display_name"
+                            v-model="user.display_name"
                             :rules="inputRules"
                             label="Name"
                             name="Name"
@@ -54,16 +55,16 @@
                             color="teal accent-3"
                           />
                           <v-text-field
-                            v-model="age"
+                            v-model="user.age"
                             :rules="inputRules"
                             label="Age"
                             name="Age"
                             prepend-icon="accessibility"
-                            type="number"
+                            type="text"
                             color="teal accent-3"
                           />
                            <v-text-field
-                             v-model="weight"
+                             v-model="user.weight"
                              :rules="inputRules"
                              id="Weight"
                              label="Weight"
@@ -73,7 +74,7 @@
                              color="teal accent-3"
                            />
                           <v-text-field
-                            v-model="height"
+                            v-model="user.height"
                             :rules="inputRules"
                             id="Height"
                             label="Height"
@@ -83,7 +84,7 @@
                             color="teal accent-3"
                           />
                           <v-text-field
-                            v-model="username"
+                            v-model="user.username"
                             :rules="inputRules"
                             id="Username"
                             label="Username"
@@ -93,7 +94,7 @@
                             color="teal accent-3"
                           />
                           <v-text-field
-                            v-model="password"
+                            v-model="user.password"
                             :rules="inputRules"
                             id="Password"
                             label="Password"
@@ -230,14 +231,14 @@ export default {
   // },
   data() {
     return {
-      username: "",
-      password: "",
-      gender: "",
-      display_name: "",
-      weight: "",
-      height: "",
-      age: "",
-      user: new User(this.username, this.password, this.display_name, this.gender,this.age,this.weight,this.height),
+      // username: "",
+      // password: "",
+      // gender: "",
+      // display_name: "",
+      // weight: "",
+      // height: "",
+      // age: "",
+      user: new User("", "","","",""),
       submitted: false,
       successful: false,
       message: '',

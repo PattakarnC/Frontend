@@ -22,7 +22,7 @@
                         </h1>
                         <v-form ref="form" v-model="valid" lazy-validation>
                           <v-text-field
-                            v-model="username"
+                            v-model="user.username"
                             :rules="inputRules"
                             label="Username"
                             name="username"
@@ -33,7 +33,7 @@
                           />
 
                           <v-text-field
-                            v-model="password"
+                            v-model="user.password"
                             :rules="inputRules"
                             id="password"
                             label="Password"
@@ -49,11 +49,12 @@
                       </v-card-text>
                       <div class="text-center mb-10">
                         <v-btn
-                          :disabled="!valid"
+
+                          to = "/home"
                           rounded
                           color="teal accent-3"
                           dark
-                          @click="handleLogin"
+
                         >SIGN IN</v-btn
                         >
                       </div>
@@ -155,7 +156,7 @@ export default {
 
   data() {
     return {
-      user: new user(this.username, this.password),
+      user: new user("", ""),
       loading: false,
       message: '',
       inputRules: [v => !!v || 'This field is required'],
@@ -189,6 +190,13 @@ export default {
           }
         );
       }
+    },
+    handleLogout() {
+      this.$store.dispatch('auth/logout', this.user).then(
+        () => {
+          this.$router.push('/');
+        }
+      );
     }
   }
 };

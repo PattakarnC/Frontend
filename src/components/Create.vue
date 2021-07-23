@@ -108,73 +108,110 @@
 <style scoped>
 
 </style>
+<!--<script>-->
+<!--import UserService from '../services/user.service'-->
+
+<!--// import axios from "axios";-->
+
+<!--export default {-->
+<!--  name: "Create",-->
+
+<!--  data: vm => ({-->
+<!--    date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),-->
+<!--    dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),-->
+<!--    menu1: false,-->
+<!--    menu2: false,-->
+
+<!--    food: "",-->
+<!--    consumedCal: 0,-->
+<!--    // dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),-->
+<!--  }),-->
+
+<!--// (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)-->
+<!--//   computed: {-->
+<!--//     computedDateFormatted () {-->
+<!--//       return this.formatDate(this.date)-->
+<!--//     },-->
+<!--//   },-->
+<!--  watch: {-->
+<!--    date() {-->
+<!--      this.date = this.formatDate(this.date);-->
+<!--    }-->
+<!--  },-->
+
+<!--  methods: {-->
+
+<!--    create() {-->
+<!--      UserService.postCreate(this.$store.state.auth.user, this.date, this.consumedCal)-->
+<!--    // postConsumedCal() {-->
+<!--    //   return axios.post('http://localhost:8080/api/auth/'+ 'create/' + this.u)-->
+<!--    //   // async foo() {-->
+<!--    //   //   let food = {-->
+<!--    //   //     foodBack: this.food,-->
+<!--    //   //     cal: this.cal-->
+<!--    //   //   }-->
+<!--    //   //-->
+<!--    //   // let response = await Vue.axios.post("url", food);-->
+<!--    //   //-->
+<!--    //   // },-->
+<!--    //-->
+<!--    },-->
+<!--    formatDate(date) {-->
+<!--      if (!date) return null;-->
+
+<!--      const [year, month, day] = date.split("-");-->
+<!--      return `${month}/${day}/${year}`;-->
+<!--    },-->
+<!--    parseDate(date) {-->
+<!--      if (!date) return null;-->
+
+<!--      const [month, day, year] = date.split("/");-->
+<!--      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;-->
+<!--    },-->
+<!--    handleLogout() {-->
+<!--      this.$store.dispatch('auth/logout', this.user).then(-->
+<!--        () => {-->
+<!--          this.$router.push('/');-->
+<!--        }-->
+<!--      );-->
+<!--    }-->
+<!--  }-->
+<!--};-->
+<!--</script>-->
 <script>
-import UserService from '../services/user.service'
-
-// import axios from "axios";
-
 export default {
-  name: "Create",
-
   data: vm => ({
     date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
     menu1: false,
     menu2: false,
-
-    food: "",
-    consumedCal: 0,
-    // dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
   }),
 
-// (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
-//   computed: {
-//     computedDateFormatted () {
-//       return this.formatDate(this.date)
-//     },
-//   },
+  // computed: {
+  //   computedDateFormatted () {
+  //     return this.formatDate(this.date)
+  //   },
+  // },
+
   watch: {
-    date() {
-      this.date = this.formatDate(this.date);
-    }
+    date () {
+      this.dateFormatted = this.formatDate(this.date)
+    },
   },
 
   methods: {
+    formatDate (date) {
+      if (!date) return null
 
-    create() {
-      UserService.postCreate(this.$store.state.auth.user, this.date, this.consumedCal)
-    // postConsumedCal() {
-    //   return axios.post('http://localhost:8080/api/auth/'+ 'create/' + this.u)
-    //   // async foo() {
-    //   //   let food = {
-    //   //     foodBack: this.food,
-    //   //     cal: this.cal
-    //   //   }
-    //   //
-    //   // let response = await Vue.axios.post("url", food);
-    //   //
-    //   // },
-    //
+      const [year, month, day] = date.split('-')
+      return `${month}/${day}/${year}`
     },
-    formatDate(date) {
-      if (!date) return null;
+    parseDate (date) {
+      if (!date) return null
 
-      const [year, month, day] = date.split("-");
-      return `${month}/${day}/${year}`;
+      const [month, day, year] = date.split('/')
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
-    parseDate(date) {
-      if (!date) return null;
-
-      const [month, day, year] = date.split("/");
-      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-    },
-    handleLogout() {
-      this.$store.dispatch('auth/logout', this.user).then(
-        () => {
-          this.$router.push('/');
-        }
-      );
-    }
-  }
-};
+  },
+}
 </script>
