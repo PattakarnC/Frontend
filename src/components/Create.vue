@@ -8,7 +8,7 @@
               <v-icon>home</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn to="/">
+            <v-btn @click="handleLogout">
               <v-icon color="white-text">LOG OUT</v-icon>
             </v-btn>
           </v-app-bar>
@@ -58,40 +58,6 @@
                                     @input="menu1 = false"
                                   ></v-date-picker>
                                 </v-menu>
-                                <!--                                <p>Date in ISO format: <strong>{{ date }}</strong></p>-->
-                                <!--                              </v-col>-->
-
-                                <!--                              <v-col-->
-                                <!--                                cols="12"-->
-                                <!--                                lg="6"-->
-                                <!--                              >-->
-                                <!--                                <v-menu-->
-                                <!--                                  v-model="menu2"-->
-                                <!--                                  :close-on-content-click="false"-->
-                                <!--                                  transition="scale-transition"-->
-                                <!--                                  offset-y-->
-                                <!--                                  max-width="290px"-->
-                                <!--                                  min-width="auto"-->
-                                <!--                                >-->
-                                <!--                                  <template v-slot:activator="{ on, attrs }">-->
-                                <!--                                    <v-text-field-->
-                                <!--                                      v-model="computedDateFormatted"-->
-                                <!--                                      label="Date (read only text field)"-->
-                                <!--                                      hint="MM/DD/YYYY format"-->
-                                <!--                                      persistent-hint-->
-                                <!--                                      prepend-icon="mdi-calendar"-->
-                                <!--                                      readonly-->
-                                <!--                                      v-bind="attrs"-->
-                                <!--                                      v-on="on"-->
-                                <!--                                    ></v-text-field>-->
-                                <!--                                  </template>-->
-                                <!--                                  <v-date-picker-->
-                                <!--                                    v-model="date"-->
-                                <!--                                    no-title-->
-                                <!--                                    @input="menu2 = false"-->
-                                <!--                                  ></v-date-picker>-->
-                                <!--                                </v-menu>-->
-                                <!--                                <p>Date in ISO format: <strong>{{ date }}</strong></p>-->
                               </v-col>
                             </v-row>
                           </v-container>
@@ -125,7 +91,7 @@
                         </v-form>
                       </v-card-text>
                       <div class="text-center mb-10 ">
-                        <v-btn rounded color="teal accent-3" dark to="/exercise">NEXT</v-btn>
+                        <v-btn @click="Create" rounded color="teal accent-3" dark to="/exercise">NEXT</v-btn>
                       </div>
                     </v-col>
                   </v-row>
@@ -143,23 +109,30 @@
 
 </style>
 <script>
+import UserService from '../services/user.service'
+
+// import axios from "axios";
 
 export default {
   name: "Create",
-  data: () => ({
-    date: "",
+
+  data: vm => ({
+    date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+    dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
+    menu1: false,
+    menu2: false,
+
     food: "",
     consumedCal: 0,
     // dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
   }),
 
 // (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
-  // computed: {
-  //   computedDateFormatted () {
-  //     return this.formatDate(this.date)
-  //   },
-  // },
-
+//   computed: {
+//     computedDateFormatted () {
+//       return this.formatDate(this.date)
+//     },
+//   },
   watch: {
     date() {
       this.date = this.formatDate(this.date);
@@ -167,17 +140,22 @@ export default {
   },
 
   methods: {
-    // async foo() {
-    //   let food = {
-    //     foodBack: this.food,
-    //     cal: this.cal
-    //   }
-    //
-    // let response = await Vue.axios.post("url", food);
-    //
-    // },
 
-
+    create() {
+      UserService.postCreate(this.$store.state.auth.user, this.date, this.consumedCal)
+    // postConsumedCal() {
+    //   return axios.post('http://localhost:8080/api/auth/'+ 'create/' + this.u)
+    //   // async foo() {
+    //   //   let food = {
+    //   //     foodBack: this.food,
+    //   //     cal: this.cal
+    //   //   }
+    //   //
+    //   // let response = await Vue.axios.post("url", food);
+    //   //
+    //   // },
+    //
+    },
     formatDate(date) {
       if (!date) return null;
 
@@ -189,6 +167,13 @@ export default {
 
       const [month, day, year] = date.split("/");
       return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    },
+    handleLogout() {
+      this.$store.dispatch('auth/logout', this.user).then(
+        () => {
+          this.$router.push('/');
+        }
+      );
     }
   }
 };

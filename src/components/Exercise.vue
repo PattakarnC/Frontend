@@ -48,7 +48,7 @@
                         </v-form>
                       </v-card-text>
                       <div class="text-center mb-10 ">
-                        <v-btn rounded color="teal accent-3" dark to="/bmi">NEXT</v-btn>
+                        <v-btn @click="postBurnedCal" rounded color="teal accent-3" dark to="/bmi">NEXT</v-btn>
 <!--                        to="/summary"-->
                       </div>
                     </v-col>
@@ -66,10 +66,13 @@
 <script>
 // import Vue from "vue";
 
+// import axios from "axios";
+import UserService from "@/services/user.service";
+
 export default {
   name: "Exercise", // name the component
 
-  computed() {
+  mounted() {
     if (this.exerciseType == "No exercise") {
       this.burnedCal = 0*this.duration
     }
@@ -95,6 +98,18 @@ export default {
     };
   },
   methods: {
+    postBurnedCal() {
+      UserService.postBurnedCal(this.$store.state.auth.user, this.burnedCal)
+    },
+
+    handleLogout() {
+      this.$store.dispatch('auth/logout', this.user).then(
+        () => {
+          this.$router.push('/');
+        }
+      );
+    }
+  },
 
     // async submit() {
     //   if (this.$refs.form.validate()) {
@@ -103,7 +118,6 @@ export default {
     //     formData.append("No exercise", );
     //     formData.append("Walking", );
     //     formData.append("Running", );
-    //
     //
     //     let response = await Vue.axios.post("/api/login", formData);
     //

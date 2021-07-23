@@ -8,7 +8,7 @@
               <v-icon>home</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn to="/">
+            <v-btn @click="handleLogout">
               <v-icon color="white-text">LOG OUT</v-icon>
             </v-btn>
           </v-app-bar>
@@ -81,19 +81,19 @@ export default{
     }
   },
   methods:{
-    Caluclator(){
+    Caluclator() {
 
-      if(this.weight != "" && this.height != "") {
-        if(this.weight < 20 && this.height<5){
+      if (this.weight != "" && this.height != "") {
+        if (this.weight < 20 && this.height < 5) {
           this.BMI = ""
-          this.status ="Enter Weight in Kg"
-        }else if(this.height > 5 && this.weight >19 ){
+          this.status = "Enter Weight in Kg"
+        } else if (this.height > 5 && this.weight > 19) {
           this.BMI = ""
           this.status = "Enter Height in Metre"
-        }else if(this.height >5 && this.weight<20){
+        } else if (this.height > 5 && this.weight < 20) {
           this.BMI = ""
           this.status = "Your Input Is Wrong"
-        }else {
+        } else {
           this.BMI = (this.weight / this.height ** 2).toFixed(2)
           if (this.BMI < 18.5) {
             this.status = "Underweight"
@@ -105,18 +105,23 @@ export default{
             this.status = "Obesity"
           }
         }
-      }
-
-      else if(this.weight == "" && this.height == ""){
+      } else if (this.weight == "" && this.height == "") {
         this.BMI = "Enter Your Weight And Height"
-        this.status =""
-      }else if(this.weight =="" && this.height != ""){
+        this.status = ""
+      } else if (this.weight == "" && this.height != "") {
         this.BMI = "Enter Your Weight"
-        this.status =""
-      }else{
+        this.status = ""
+      } else {
         this.BMI = "Enter Your Height"
-        this.status =""
+        this.status = ""
       }
+    },
+    handleLogout() {
+      this.$store.dispatch('auth/logout', this.user).then(
+        () => {
+          this.$router.push('/');
+        }
+      );
     }
   }
 }

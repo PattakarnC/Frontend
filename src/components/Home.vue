@@ -21,7 +21,7 @@
               <v-window v-model="step">
                 <v-window-item :value="1">
                   <v-row>
-                    <v-col cols="15" md="8">
+                    <v-col cols="10" md="8">
                       <v-card-text class="mt-5">
                         <h1
                           class="
@@ -29,7 +29,7 @@
                             display-2
                             teal--text
                             text--accent-3
-                            mb-10
+                            mb-5
                           "
                         >
                           Welcome {{username}}
@@ -49,12 +49,12 @@
                       <v-card-text class="white--text mt-12">
                         <h1 class="text-center my-4">Create New Activity</h1>
                       </v-card-text>
-                      <div class="text-center">
+                      <div class="text-center" >
                         <v-btn
                           rounded
                           outlined
                           dark
-                          @click="step++"
+                           @click="step++"
                           to="/create"
                           >CREATE</v-btn
                         >
@@ -72,20 +72,16 @@
 </template>
 
 <script>
-// import axios from "axios";
+
+import UserService from '../services/user.service'
+// import home from '../models/home';
+
 
 export default {
+
   name: "Home",
-  // mounted() {
-  //   // this.username = response
-  // },
+
   data: () => ({
-    // step: 1,
-    // valid: true,
-    // username: "",
-    // password: "",
-    // usernameRules: [(v) => !!v || "Username is required"],
-    // passwordRules: [(v) => !!v || "Password is required"],
     headers: [
       {
         text: "Date",
@@ -97,29 +93,76 @@ export default {
       { text: "Burned calories", value: "burned" },
       { text: "Suggestion", value: "suggest" },
     ],
+    dataList: [],
     rows: [
       {
-        date: "",
-        consumed: "",
-        burned: "",
-        suggest: "",
+        date: "20/07/2021",
+        consumed: "2000",
+        burned: "100",
+        suggest: "Eat 100 kcal more",
       },
       {
-        date: "",
-        consumed: "",
-        burned: "",
-        suggest: "",
+        date: "21/07/2021",
+        consumed: "1900",
+        burned: "200",
+        suggest: "Eat 300 kcal more",
+      },
+      {
+        date: "22/07/2021",
+        consumed: "2500",
+        burned: "100",
+        suggest: "Eat 400 kcal less",
+      },
+      {
+        date: "23/07/2021",
+        consumed: "2000",
+        burned: "100",
+        suggest: "Eat 100 kcal more",
+      },
+      {
+        date: "24/07/2021",
+        consumed: "2050",
+        burned: "100",
+        suggest: "Eat 50 kcal more",
       },
     ],
   }),
-  // methods:{
-  //   // created() {
-  //   //   axios.get('')
-  //   //   .then(resp)=> {
-  //   //     console.log(resp)
-  //   //   }
-  //   // }
-  // }
+
+  methods: {
+    handleLogout() {
+      this.$store.dispatch('auth/logout', this.user).then(
+        () => {
+          this.$router.push('/');
+        }
+      );
+    },
+
+    getData() {
+      const data = [];
+      UserService.getData(this.$store.state.auth.user).then(
+
+        taskList => {
+          const taskData = taskList.data;
+          taskData.forEach(
+            home => {
+              data.push({
+                date: home.date,
+                consumed: home.consumedCal,
+                burned: home.burnedCal,
+                suggested: home.suggestedCal,
+              });
+            }
+          )
+
+        },error => {
+
+          console.log(error);
+        }
+      )
+      this.data = data;
+    },
+  }
+
 };
 </script>
 

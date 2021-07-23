@@ -76,12 +76,42 @@
   </div>
 </template>
 <script>
-export default{
-  date:"",
-  calIn:"",
-  calBurn:"",
-  suggest:"",
+import UserService from "@/services/user.service";
 
+export default {
+  date() {
+    return {
+      date:"",
+      consumedCal:"",
+      burnedCal:"",
+      suggestedCal:"",
+    }
+  },
+  // mounted() {
+  //   axios.get("url")
+  // },
+  methods: {
+    getCals() {
+      UserService.getSuggestedCal(this.$store.state.auth.user).then(
+        response =>{
+          console.log(response.data);
+          this.refreshCalendar();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+
+    },
+
+    handleLogout() {
+      this.$store.dispatch('auth/logout', this.user).then(
+        () => {
+          this.$router.push('/');
+        }
+      );
+    },
+  }
 }
 </script>
 

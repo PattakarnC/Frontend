@@ -10,10 +10,10 @@
                   <v-row class="fill-height">
                     <v-col cols="12" md="4" class="teal accent-3">
                       <v-card-text class="white--text mt-12">
-                        <h1 class="text-center display-1">Welcome Back!</h1>
+                        <h1 class="text-center display-1">Welcome</h1>
                         <h3
                           class="text-center my-4"
-                        >To keep connected with us, please sign in!</h3>
+                        >If you already have an account, please sign in!</h3>
                       </v-card-text>
                       <div class="text-center">
                         <v-btn rounded outlined dark @click="step--" to="/">Sign in</v-btn>
