@@ -50,7 +50,7 @@
                       <div class="text-center mb-10">
                         <v-btn
 
-                          to = "/home"
+                          @click="handleLogin"
                           rounded
                           color="teal accent-3"
                           dark
